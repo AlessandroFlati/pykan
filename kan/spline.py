@@ -57,7 +57,8 @@ def B_batch(x, grid, k=0, extend=True, device='cpu'):
         value = (x >= grid[:, :-1]) * (x < grid[:, 1:])
     else:
         B_km1 = B_batch(x[:, 0], grid=grid[:, :, 0], k=k - 1, extend=False, device=device)
-        value = (x - grid[:, :-(k + 1)]) / (grid[:, k:-1] - grid[:, :-(k + 1)]) * B_km1[:, :-1] + (grid[:, k + 1:] - x) / (grid[:, k + 1:] - grid[:, 1:(-k)]) * B_km1[:, 1:]
+        value = (x - grid[:, :-(k + 1)]) / (grid[:, k:-1] - grid[:, :-(k + 1)]) * B_km1[:, :-1] + (
+                    grid[:, k + 1:] - x) / (grid[:, k + 1:] - grid[:, 1:(-k)]) * B_km1[:, 1:]
     return value
 
 
@@ -134,5 +135,7 @@ def curve2coef(x_eval, y_eval, grid, k, device="cpu"):
     '''
     # x_eval: (size, batch); y_eval: (size, batch); grid: (size, grid); k: scalar
     mat = B_batch(x_eval, grid, k, device=device).permute(0, 2, 1)
-    coef = torch.linalg.lstsq(mat.to('cpu'), y_eval.unsqueeze(dim=2).to('cpu')).solution[:, :, 0]  # sometimes 'cuda' version may diverge
+    # coef = torch.linalg.lstsq(mat, y_eval.unsqueeze(dim=2)).solution[:, :, 0]
+    coef = torch.linalg.lstsq(mat.to(device), y_eval.unsqueeze(dim=2).to(device),
+                              driver='gelsy' if device == 'cpu' else 'gels').solution[:, :, 0]
     return coef.to(device)
