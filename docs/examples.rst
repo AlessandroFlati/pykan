@@ -6,18 +6,19 @@ Examples
 .. toctree::
    :maxdepth: 1
    
-   Examples/Example_1_function_fitting.rst
-   Examples/Example_2_deep_formula.rst
-   Examples/Example_3_classfication.rst
-   Examples/Example_4_symbolic_regression.rst
-   Examples/Example_5_special_functions.rst
-   Examples/Example_6_PDE.rst
-   Examples/Example_7_continual_learning.rst
-   Examples/Example_8_scaling.rst
-   Examples/Example_9_singularity.rst
-   Examples/Example_10_relativity-addition.rst
-   Examples/Example_11_encouraing_linear.rst
-   Examples/Example_12_unsupervised_learning.rst
-   Examples/Example_13_phase_transition.rst
+   Example/Example_1_function_fitting.rst
+   Example/Example_3_deep_formula.rst
+   Example/Example_4_classfication.rst
+   Example/Example_5_special_functions.rst
+   Example/Example_6_PDE_interpretation.rst
+   Example/Example_7_PDE_accuracy.rst
+   Example/Example_8_continual_learning.rst
+   Example/Example_9_singularity.rst
+   Example/Example_10_relativity-addition.rst
+   Example/Example_11_encouraing_linear.rst
+   Example/Example_12_unsupervised_learning.rst
+   Example/Example_13_phase_transition.rst
+   Example/Example_14_knot_supervised.rst
+   Example/Example_15_knot_unsupervised.rst
 
    

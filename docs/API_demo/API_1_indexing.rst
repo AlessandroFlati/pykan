@@ -1,12 +1,15 @@
-Demo 1: Indexing
-================
+API 1: Indexing
+===============
 
 .. code:: ipython3
 
-    from kan import KAN
-    import torch
-    model = KAN(width=[2,3,2,1])
-    x = torch.normal(0,1,size=(100,2))
+    from kan import *
+    
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print(device)
+    
+    model = KAN(width=[2,3,2,1], noise_scale=0.3, device=device)
+    x = torch.normal(0,1,size=(100,2)).to(device)
     model(x);
     beta = 100
     model.plot(beta=beta)
@@ -16,8 +19,15 @@ Demo 1: Indexing
     # 1 output node
 
 
+.. parsed-literal::
 
-.. image:: API_1_indexing_files/API_1_indexing_1_0.png
+    cuda
+    checkpoint directory created: ./model
+    saving model version 0.0
+
+
+
+.. image:: API_1_indexing_files/API_1_indexing_1_1.png
 
 
 Indexing of edges (activation functions)
@@ -38,7 +48,9 @@ and see it turns red.
 
 .. parsed-literal::
 
-    r2 is 0.9995602360489043
+    r2 is 0.9785453677177429
+    saving model version 0.1
+    saving model version 0.2
 
 
 
@@ -54,7 +66,9 @@ and see it turns red.
 
 .. parsed-literal::
 
-    r2 is 0.9992399109543574
+    r2 is 0.991183876991272
+    saving model version 0.3
+    saving model version 0.4
 
 
 
@@ -70,7 +84,9 @@ and see it turns red.
 
 .. parsed-literal::
 
-    r2 is 0.9973507118333039
+    r2 is 0.9494338631629944
+    saving model version 0.5
+    saving model version 0.6
 
 
 
@@ -86,7 +102,9 @@ and see it turns red.
 
 .. parsed-literal::
 
-    r2 is 0.9999506177136502
+    r2 is 0.9999909996986389
+    saving model version 0.7
+    saving model version 0.8
 
 
 
@@ -102,7 +120,9 @@ and see it turns red.
 
 .. parsed-literal::
 
-    r2 is 0.9999411308602921
+    r2 is 0.9998168349266052
+    saving model version 0.9
+    saving model version 0.10
 
 
 
@@ -121,6 +141,14 @@ node we want to remove.
 
     model.remove_node(1,0)
 
+
+.. parsed-literal::
+
+    saving model version 0.11
+    saving model version 0.12
+    saving model version 0.13
+
+
 .. code:: ipython3
 
     model.plot(beta=beta)
@@ -134,6 +162,14 @@ node we want to remove.
 
     model.remove_node(2,1)
 
+
+.. parsed-literal::
+
+    saving model version 0.14
+    saving model version 0.15
+    saving model version 0.16
+
+
 .. code:: ipython3
 
     model.plot(beta=beta)
@@ -146,6 +182,14 @@ node we want to remove.
 .. code:: ipython3
 
     model.remove_node(1,2)
+
+
+.. parsed-literal::
+
+    saving model version 0.17
+    saving model version 0.18
+    saving model version 0.19
+
 
 .. code:: ipython3
 
@@ -164,7 +208,7 @@ Indexing of layers
     # KAN spline layers are refererred to as act_fun
     # KAN symbolic layers are referred to as symbolic_fun
     
-    model = KAN(width=[2,3,2,1])
+    model = KAN(width=[2,3,5,1])
     
     i = 0
     model.act_fun[i] # => KAN Layer (Spline)
@@ -177,12 +221,14 @@ Indexing of layers
 
 .. parsed-literal::
 
+    checkpoint directory created: ./model
+    saving model version 0.0
     2 3
     2 3
-    3 2
-    3 2
-    2 1
-    2 1
+    3 5
+    3 5
+    5 1
+    5 1
 
 
 .. code:: ipython3
@@ -199,7 +245,6 @@ Indexing of layers
 .. parsed-literal::
 
     Parameter containing:
-    tensor([[0., 0.]])
-
+    tensor([[0., 0., 0., 0., 0.]])
 
 
